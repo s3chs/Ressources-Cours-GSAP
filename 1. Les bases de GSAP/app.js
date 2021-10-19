@@ -1,5 +1,5 @@
-const img1 = document.querySelector(".container-images img:nth-child(1)");
-const btnCat = document.querySelector(".cat-fade");
+// const img1 = document.querySelector(".container-images img:nth-child(1)");
+// const btnCat = document.querySelector(".cat-fade");
 
 // gsap.to(img1, { x: 100, duration: 2 });
 // gsap.to("h1", { color: "red" });
@@ -55,12 +55,49 @@ const btnCat = document.querySelector(".cat-fade");
 
 // TWEEN
 
-const anim = gsap.to(img1, {
-  y: 250,
-  yoyo: true,
-  repeat: 1,
+// const anim = gsap.to(img1, {
+//   y: 250,
+//   yoyo: true,
+//   repeat: 1,
+// });
+
+// anim.duration(5);
+// anim.pause();
+// anim.resume();
+
+//
+
+// TIMELINE TUTO
+
+const img1 = document.querySelector(".container-images img:nth-child(1)");
+const img2 = document.querySelector(".container-images img:nth-child(2)");
+const img3 = document.querySelector(".container-images img:nth-child(3)");
+const title = document.querySelector(".title");
+const txt = document.querySelector(".txt");
+
+const TL = gsap.timeline({
+  defaults: {
+    duration: 1,
+    ease: "power2",
+  },
+  //   repeat: -1,
+  //   repeatDelay: 0.5,
+  //   yoyo: true,
+  //   onComplete: () => console.log("complete"),
+  //   pause: true,
 });
 
-anim.duration(5);
-anim.pause();
-anim.resume( );
+// Avec position relatif aka 0.25s après le début de la précédente
+TL.to(img1, { y: 0, autoAlpha: 1 });
+TL.to(img2, { y: 0, autoAlpha: 1 }, "-=0.75");
+TL.to(img3, { y: 0, autoAlpha: 1 }, "-=0.75");
+TL.to(title, { y: 0, autoAlpha: 1 }, "-=0.75");
+TL.add(() => console.log("timeline terminado"));
+TL.to(txt, { y: 0, autoAlpha: 1 }, "-=0.75");
+
+//  < signifie "au début du tween précedent" et superieur "a la fin du tween precedent"
+//  on peut utiliser "<0.5"  qui signifie "0.5s après la fin du tween précedent"
+
+setTimeout(() => {
+  //   TL.play("endAnim");
+}, 1000);
